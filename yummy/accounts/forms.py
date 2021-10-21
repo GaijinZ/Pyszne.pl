@@ -17,3 +17,9 @@ class RegisterForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(label='Email')
+    last_name = forms.CharField(label='Last name')
+    password = forms.CharField(widget=forms.PasswordInput)
