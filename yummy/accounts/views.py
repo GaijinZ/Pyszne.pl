@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import View, CreateView
-from django.contrib.auth import login
+from django.views.generic import View, CreateView, RedirectView, FormView
+from django.contrib.auth import logout, authenticate, login
 from django.utils.encoding import force_text, force_bytes
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from .tokens import account_activation_token
 from .models import User
 
@@ -65,3 +65,27 @@ class ActivateAccount(View):
         else:
             messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
             return redirect('/')
+
+
+class LoginView(FormView):
+    form_class = LoginForm
+    success_url = '/'
+    template_name = 'accounts/sign-in.html'
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email')
+        last_name = form.cleaned_data.get('last_name')
+        password = form.cleaned_data.get('password')
+        user = authenticate(self.request, username=email, last_name=last_name, password=password)
+        if user and user.is_active:
+            login(self.request, user)
+            return redirect(self.success_url)
+        return super().form_invalid(form)
+
+
+class LogoutView(RedirectView):
+    url = '/'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return super().get(request, *args, **kwargs)
