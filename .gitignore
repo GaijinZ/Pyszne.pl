@@ -1,0 +1,6 @@
+pyvenv.cfg
+Scripts/
+.idea/
+Include/
+Lib/
+yummy/yummy/settings.py
