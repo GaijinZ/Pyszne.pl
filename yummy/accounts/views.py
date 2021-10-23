@@ -63,7 +63,9 @@ class ActivateAccount(View):
             messages.success(request, 'Your account have been confirmed.')
             return redirect('/')
         else:
-            messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
+            messages.warning(
+                request, 'The confirmation link was invalid, possibly because it has already been used.'
+            )
             return redirect('/')
 
 
