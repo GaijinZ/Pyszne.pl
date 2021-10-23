@@ -20,7 +20,9 @@ class MyUserManager(BaseUserManager):
             last_name=last_name,
             password=password,
         )
-        user.is_admin = True
+        user.is_superuser = True
+        user.is_active = True
+        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -33,6 +35,7 @@ class User(AbstractBaseUser):
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
