@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class Address(models.Model):
+    city = models.CharField(max_length=250)
+    post_code = models.IntegerField()
+    street_name = models.CharField(max_length=250)
+    building_number = models.IntegerField()
+
+
 class TypeOfRestaurant(models.Model):
     type_of_restaurant = models.CharField(max_length=50, null=True, blank=True)
 
@@ -16,3 +23,4 @@ class Restaurant(models.Model):
     restaurant_type = models.ManyToManyField(TypeOfRestaurant)
     delivery = models.OneToOneField(Delivery, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='restaurant_picture')
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
