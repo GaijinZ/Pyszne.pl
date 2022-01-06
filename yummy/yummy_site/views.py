@@ -5,3 +5,7 @@ from django.views.generic import TemplateView
 
 class HomeView(TemplateView):
     template_name = 'yummy/home.html'
+
+
+class SearchView(TemplateView):
+    pass
