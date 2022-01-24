@@ -6,5 +6,5 @@ app_name = 'yummy_site'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('search', SearchView.as_view(), name='search'),
+    path('food/', SearchView.as_view(), name='food'),
 ]

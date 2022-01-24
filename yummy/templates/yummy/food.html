@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% for restaurant in available_restaurants %}
+    {{ restaurant.name }}
+{% endfor %}
+
+{% endblock %}
+
