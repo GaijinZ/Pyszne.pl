@@ -3,7 +3,7 @@
 
 
 {% block content %}
- <form id="address-form" action="" method="get" autocomplete="off">
+ <form action="{% url 'yummy:food' %}" id="address-form" method="GET" autocomplete="on">
       <label class="full-field">
         <span class="form-label">Deliver to</span>
         <input
@@ -13,15 +13,8 @@
           autocomplete="off"
         />
       </label>
-     <label class="full-field">
-        <span class="form-label">Apartment, unit, suite, or floor #</span>
-        <input id="address2" name="apartment-number" />
-      </label>
-      <button type="button" class="my-button">Save address</button>
-
-      <!-- Reset button provided for development testing convenience.
-  Not recommended for user-facing forms due to risk of mis-click when aiming for Submit button. -->
-      <input type="reset" value="Clear form" />
+     <input type="hidden" id="postcode" name="postcode">
+      <button type="submit" class="my-button">Show restaurants</button>
     </form>
 
 <script src="{% static 'js/home/home.js' %}"></script>
