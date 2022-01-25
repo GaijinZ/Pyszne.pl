@@ -3,12 +3,12 @@ from django.db import models
 
 class Address(models.Model):
     city = models.CharField(max_length=250)
-    post_code = models.CharField(max_length=10)
+    postcode = models.CharField(max_length=10)
     street_name = models.CharField(max_length=250)
     building_number = models.IntegerField()
 
     def __str__(self):
-        return f'{self.city} {self.post_code}, {self.street_name}'
+        return f'{self.city} {self.postcode}, {self.street_name}'
 
 
 class TypeOfRestaurant(models.Model):

@@ -13,5 +13,6 @@ class SearchView(ListView):
     context_object_name = 'available_restaurants'
 
     def get_queryset(self):
-        available_restaurants = Restaurant.objects.filter(address__postcode=self.request.GET.get('postcode'))
+        available_restaurants = Restaurant.objects.all().select_related('address')\
+            .filter(address__postcode=self.request.GET.get('postcode'))
         return available_restaurants
