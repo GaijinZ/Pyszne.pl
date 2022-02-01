@@ -30,9 +30,9 @@ class Delivery(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     restaurant_type = models.ManyToManyField(TypeOfRestaurant)
-    delivery = models.OneToOneField(Delivery, on_delete=models.CASCADE)
+    delivery = models.ForeignKey(Delivery, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='restaurant_picture', blank=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} {self.address}'
