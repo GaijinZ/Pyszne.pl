@@ -27,12 +27,23 @@ class Delivery(models.Model):
         return f'{self.delivery_option}'
 
 
+class Menu(models.Model):
+    dish_name = models.CharField(max_length=100)
+    dish_description = models.CharField(max_length=200)
+    dish_price = models.FloatField()
+    dish_sides = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.dish_name}'
+
+
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     restaurant_type = models.ManyToManyField(TypeOfRestaurant)
     delivery = models.ForeignKey(Delivery, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='restaurant_picture', blank=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    menu = models.ManyToManyField(Menu)
 
     def __str__(self):
         return f'{self.name} {self.address}'
